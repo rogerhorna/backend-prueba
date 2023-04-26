@@ -1,0 +1,16 @@
+<p>Muchas gracias por su compra, a continuacion se despliega el link de descarga: </p>
+<div id="links_descarga"></div>
+<p><b style="color: red;">Recuerde que una vez pinche el Link de descarga, esta tiene una vigencia maxima de 1 minuto</b></p>
+<p><script>
+    (function(url) {
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = Object.fromEntries(urlSearchParams.entries());
+        var text = atob(params.data);
+        var json =  JSON.parse(text);
+        for( var i in json.ids) {
+            var a  = document.createElement("a");
+            a.innerText = "Descargar -> " + json.nombres[i];
+            a.href = url.replace("{token}",json.tokens[i]).replace("{uname}",json.uname);
+            document.querySelector("#links_descarga").append(a);
+        }})('https://servicios.scratch-it.tech/lectura/api/woocommerce/download/{token}?uname={uname}');
+</script></p>
